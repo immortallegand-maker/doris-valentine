@@ -18,14 +18,14 @@ export default function Choices() {
           {/* Movie Tile */}
           <MovieTile
             title="Movie Night 💕"
-            image="/title.png"
+            image="/MovetimePoster.png"
             onClick={() => setSelected("one")}
           />
 
           {/* Surprise Tile → Redirect */}
           <MovieTile
             title="Photobooth 💘"
-            image="/booth.png"
+            image="/PhotoBoothPoster.png"
             onClick={() => router.push("/surprise")}
           />
 
