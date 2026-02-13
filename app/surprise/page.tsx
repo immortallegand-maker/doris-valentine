@@ -17,7 +17,7 @@ const photos = [
   { image: "/9.jpg", caption: "You & Me Always 💘" },
   { image: "/10.jpg", caption: "This Trip/Visit...made me realize how much badly I wanted to hug you .. kiss you 💘" },
   { image: "/11.jpg", caption: "Sneak Dates ... Perfect..Food..Our Space..You Me ..and Lotss of Wild fantasies to real 💘" },
-  { image: "/12.jpg", caption: "It always soo hard when we meet and I fight urgue to fucking kiss you 💘" },
+  { image: "/12.jpg", caption: "It always soo hard when we meet and I fight urgue to kiss you 💘" },
   { image: "/13.jpeg", caption: "This was the one the best idea made real... we look soo cute and happy💘" },
   { image: "/14.jpeg", caption: "Need more of trips..dates ..Need more of you and me 💘" },
   { image: "/15.jpeg", caption: "So many memories made .. so many more to come 💘" },
@@ -29,7 +29,7 @@ export default function Surprise() {
 
   const handleClick = (index: number) => {
     if (activeIndex === index) {
-      setActiveIndex(null); // restore to original size
+      setActiveIndex(null); // restore original size
     } else {
       setActiveIndex(index); // enlarge clicked one
     }
@@ -37,7 +37,7 @@ export default function Surprise() {
 
   return (
     <main className="min-h-screen bg-black text-white px-10 py-12">
-
+      
       {/* Header */}
       <div className="flex justify-between items-center mb-12">
         <h1 className="text-4xl font-bold">
@@ -52,9 +52,8 @@ export default function Surprise() {
         </button>
       </div>
 
-      {/* Album */}
+      {/* Album Grid */}
       <div className="flex flex-wrap justify-center gap-10">
-
         {photos.map((photo, index) => {
           const isActive = activeIndex === index;
 
@@ -66,10 +65,11 @@ export default function Surprise() {
               className="relative cursor-pointer"
               animate={{
                 scale: isActive ? 1.7 : 1,
-                zIndex: isActive ? 10 : 1,
+                zIndex: isActive ? 20 : 1,
               }}
               transition={{ duration: 0.3 }}
             >
+              {/* Image */}
               <div className="relative w-[170px] aspect-[9/16] overflow-hidden rounded-2xl shadow-2xl">
                 <Image
                   src={photo.image}
@@ -79,16 +79,22 @@ export default function Surprise() {
                 />
               </div>
 
-              <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-3 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-b-2xl">
-                <p className="text-xs text-center">
-                  {photo.caption}
-                </p>
-              </div>
-
+              {/* Caption only when enlarged */}
+              {isActive && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute bottom-0 left-0 right-0 bg-black/80 p-4 rounded-b-2xl"
+                >
+                  <p className="text-sm text-center">
+                    {photo.caption}
+                  </p>
+                </motion.div>
+              )}
             </motion.div>
           );
         })}
-
       </div>
 
     </main>
